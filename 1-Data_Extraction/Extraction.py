@@ -1,13 +1,29 @@
 # Databricks notebook source
+# MAGIC %md
+# MAGIC ## Extracting data
+
+# COMMAND ----------
+
+# Command used to receive a date from AirFlow
 dbutils.widgets.text("data_execucao", "")
 data_execucao = dbutils.widgets.get("data_execucao")
 
 
 # COMMAND ----------
 
-import requests
-from pyspark.sql.functions import lit
+# MAGIC %md
+# MAGIC ## Imports:
 
+# COMMAND ----------
+
+import requests # Library used to access the API responsible for extracting coin data 
+from pyspark.sql.functions import lit # Function used to create a column with the dates of the day of data extraction
+
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Function to extract data
 
 # COMMAND ----------
 
@@ -27,6 +43,11 @@ def extrat_data(date, base = 'BRL'):
     raise Exception('Data not extrating.')
 
   return response.json()
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Function to save data in parquet
 
 # COMMAND ----------
 
@@ -63,9 +84,10 @@ def save_parquet(extracted_conversions):
 
 # COMMAND ----------
 
-extracted_conversions = extrat_data(data_execucao, base = 'BRL')
-save_parquet(extracted_conversions)
+# MAGIC %md
+# MAGIC ## Performing functions
 
 # COMMAND ----------
 
-
+extracted_conversions = extrat_data(data_execucao, base = 'BRL')
+save_parquet(extracted_conversions)
