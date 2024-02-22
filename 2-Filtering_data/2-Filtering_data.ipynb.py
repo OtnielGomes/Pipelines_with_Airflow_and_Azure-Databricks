@@ -19,7 +19,7 @@ from pyspark.sql.functions import to_date, first, col, round # Functions Pyspark
 # COMMAND ----------
 
 # File location and file type
-file_location = 'dbfs:/Workspace/Repos/202307063411@alunos.estacio.br/Pipelines_with_Airflow_and_Azure-Databricks/data/bronze/*/*/*'
+file_location = 'dbfs:/Workspace/Repos/otnielgomes/Pipelines_with_Airflow_and_Azure-Databricks/data/bronze/*/*/*'
 file_type = 'parquet'
 
 # Read files
@@ -135,8 +135,9 @@ result_value_BRL = result_value_BRL.coalesce(1)
 # COMMAND ----------
 
 # Datset: conversion_rate_results
+
 # File_location and Filetype
-file_location = 'dbfs:/Workspace/Repos/202307063411@alunos.estacio.br/Pipelines_with_Airflow_and_Azure-Databricks/data/silver/conversion_rate_results'
+file_location = 'dbfs:/Workspace/Repos/otnielgomes/Pipelines_with_Airflow_and_Azure-Databricks/data/silver/conversion_rate_results'
 file_type = 'csv'
 
 # Options CSV
@@ -161,7 +162,7 @@ conversion_rate_results.write.format(file_type) \
 
 # Datset: result_value_BRL
 # File_location and Filetype
-file_location = 'dbfs:/Workspace/Repos/202307063411@alunos.estacio.br/Pipelines_with_Airflow_and_Azure-Databricks/data/silver/result_value_BRL'
+file_location = 'dbfs:/Workspace/Repos/otnielgomes/Pipelines_with_Airflow_and_Azure-Databricks/data/silver/result_value_BRL'
 file_type = 'csv'
 
 # Options CSV

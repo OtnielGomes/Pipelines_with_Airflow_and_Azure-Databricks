@@ -5,8 +5,8 @@
 # COMMAND ----------
 
 # Command used to receive a date from AirFlow
-dbutils.widgets.text("data_execucao", "")
-data_execucao = dbutils.widgets.get("data_execucao")
+dbutils.widgets.text('execution_date', '')
+execution_date = dbutils.widgets.get('execution_date')
 
 
 # COMMAND ----------
@@ -33,7 +33,7 @@ def extrat_data(date, base = 'BRL'):
 
 
   headers= {
-    'apikey': 'C6nwqtMj70rFn11HC5DUBBbZ1RY0G6RZ'
+    'apikey': '*******************************'# Enter your API Key
   }
 
   params = {'base': base}
@@ -57,7 +57,7 @@ def save_parquet(extracted_conversions):
     year, month, day = extracted_conversions['date'].split('-')
 
     # Defining the path 
-    path = f'/Workspace/Repos/202307063411@alunos.estacio.br/Pipelines_with_Airflow_and_Azure-Databricks/data/bronze/{year}/{month}/{day}'
+    path = f'/Workspace/Repos/otnielgomes/Pipelines_with_Airflow_and_Azure-Databricks/data/bronze/{year}/{month}/{day}'
 
     # Saving data to a variable
     response = [(coin, float(rate)) for coin, rate in extracted_conversions['rates'].items()]
@@ -89,5 +89,5 @@ def save_parquet(extracted_conversions):
 
 # COMMAND ----------
 
-extracted_conversions = extrat_data(data_execucao, base = 'BRL')
+extracted_conversions = extrat_data(execution_date, base = 'BRL')
 save_parquet(extracted_conversions)
